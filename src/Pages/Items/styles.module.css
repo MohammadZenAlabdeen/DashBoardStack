@@ -39,7 +39,7 @@
         flex-wrap: wrap;
         padding: 24px 0 0 0;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-start;
         column-gap: 30px;
         flex-grow: 1; 
 
