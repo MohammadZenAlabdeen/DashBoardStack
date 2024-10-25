@@ -11,7 +11,7 @@ interface ItemType {
 
 interface ItemsContextType {
   items: ItemType[] | undefined;
-  setItems: (items: ItemType[]) => void;
+  setItems: (items: ItemType[]|undefined) => void;
 }
 
 const ItemsContext = createContext<ItemsContextType | undefined>(undefined);

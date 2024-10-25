@@ -1,4 +1,4 @@
-import   { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../../Contexts/UserContext";
 import { useTheme } from "../../Contexts/ThemeContext";
 import { BiSearch } from "react-icons/bi";
@@ -17,26 +17,38 @@ interface Children {
   searchOn: boolean;
 }
 
+interface ItemType {
+  id: number;
+  name: string;
+  price: string;
+  image_url: string;
+  created_at: string;
+  updated_at: string;
+}
+
 const NavBar = ({ logo, searchOn }: Children) => {
   const { user } = useUser();
   const { theme, toggleTheme } = useTheme();
   const { items, setItems } = useItems();
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const [oldItems] = useState(items);
+  const [originalItems, setOriginalItems] = useState<ItemType[]>([]);
 
   useEffect(() => {
-    if (oldItems) {
-      if (searchQuery.trim() !== "") {
-        const filteredItems = oldItems.filter((item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setItems(filteredItems);
-      } else {
-        setItems(oldItems);
-      }
+    if (!originalItems.length && items?.length) {
+      setOriginalItems(items);
     }
-  }, [searchQuery, oldItems, setItems]);
+  }, [items, originalItems.length]);
+
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setItems(originalItems);
+    } else {
+      const filteredItems = originalItems.filter((item) =>
+        item?.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setItems(filteredItems);
+    }
+  }, [searchQuery, originalItems, setItems]);
 
   return (
     <nav className={styles.navbar}>
@@ -56,7 +68,8 @@ const NavBar = ({ logo, searchOn }: Children) => {
             <input
               type="search"
               className={styles.search}
-              placeholder={"  Search a product"}
+              placeholder="  Search a product"
+              value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
@@ -66,6 +79,7 @@ const NavBar = ({ logo, searchOn }: Children) => {
             <img
               src={user?.profile_image_url || undefined}
               className={styles.UserIcon}
+              alt="User Profile"
             />
             <div className={styles.UserData}>
               <h1 className={styles.FullName}>
