@@ -41,10 +41,10 @@
         justify-content: flex-start;
         align-items: flex-start;
         column-gap: 30px;
+        row-gap: 4px;
         flex-grow: 1; 
 
         .itemContainer {
-            margin-bottom: 2px;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 1px 1px 2px 2px var(--secondary-background-color);
