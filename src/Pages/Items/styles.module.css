@@ -33,6 +33,7 @@
     }
 
     .itemsContainer {
+        overflow: auto;
         display: flex;
         width: 100%;
         flex-wrap: wrap;
