@@ -1,6 +1,7 @@
 .container{
     background-color: white;
     color: black;
+    max-height: 90vh;
     padding: 40px 30px;
     display: flex;
     justify-content: center;
