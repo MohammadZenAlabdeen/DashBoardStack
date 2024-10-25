@@ -1,0 +1,63 @@
+.sidebar {
+    padding: 50px 0;
+    height: calc(100vh - 55px);
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:var(--secondary-background-color);
+    justify-content: space-between;
+
+    .Logout{
+        cursor: pointer;
+        background-color: #4880FF;
+        color:white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border-radius: 8px;
+        border: none;
+        width: 180px;
+        height: 40px;
+        span{
+            font-weight: 400;
+            font-size: 16px;
+        }
+    }
+    .sidebarItems {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        .active{
+            border-left: 4px solid blue;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            text-decoration: none;
+            justify-content: center;
+            gap: 10px;
+
+            span {
+                width: 120px;
+            }
+        }
+        .item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            text-decoration: none;
+            justify-content: center;
+            gap: 10px;
+
+            span {
+                width: 120px;
+            }
+        }
+    }
+
+}
