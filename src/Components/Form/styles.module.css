@@ -5,15 +5,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 45vw;
+    max-width: 56.2vw;
     flex-direction: column;
     border-radius: 15px;
     .outterInputContainer{
-        margin: 20px 0;
+        margin: 18px 0;
         display: flex;
         justify-content: center;
         width: 100%;
-        gap: 10px;
+        gap: 20px;
         flex-wrap: wrap;
         .innerInputContainer{
             display: flex;
@@ -21,7 +21,7 @@
             flex-grow: 1;
             gap: 10px;
             input{
-                height: 40px;
+                height: 38px;
                 border: 1px solid lightgrey;
                 border-radius: 10px;
                 padding: 10px;

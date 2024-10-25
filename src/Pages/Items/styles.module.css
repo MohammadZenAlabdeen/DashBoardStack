@@ -37,13 +37,14 @@
         display: flex;
         width: 100%;
         flex-wrap: wrap;
-        padding: 20px 2px;
+        padding: 24px 0 0 0;
         justify-content: flex-start;
-        gap: 30px;
+        align-items: center;
+        column-gap: 30px;
         flex-grow: 1; 
 
         .itemContainer {
-            margin-bottom: -10px;
+            margin-bottom: 2px;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 1px 1px 2px 2px var(--secondary-background-color);
@@ -110,7 +111,7 @@
     .pagination {
         display: flex;
         justify-content: center;
-        margin-top: 8px;
+        padding: 8px 0;
     }
 
     .pagination button {
