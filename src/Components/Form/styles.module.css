@@ -60,6 +60,7 @@
         gap: 10px;
         width: 100%;
         button{
+            cursor: pointer;
             background: blue;
             color: white;
             width: 50%;
