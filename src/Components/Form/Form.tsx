@@ -93,6 +93,7 @@ const Form = ({
         }
       }
     } catch (error) {
+      toast("there was an error");
       console.error("Error submitting form: ", error);
     }
   };
