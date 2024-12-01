@@ -93,7 +93,7 @@ const Form = ({
         }
       }
     } catch (error) {
-      toast("there was an error");
+      toast(isRegister? "there was an error make sure the fields are filled correctly" : "there was an error make sure the account entered is correct");
       console.error("Error submitting form: ", error);
     }
   };
