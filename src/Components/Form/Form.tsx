@@ -4,6 +4,7 @@ import { FormEvent, useRef, useState, ChangeEvent, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../../Contexts/UserContext";
 import { ToastContainer, toast } from "react-toastify";
+import { z } from "zod";
 
 interface Inputs {
   name: string;
@@ -47,6 +48,49 @@ const Form = ({
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    const formSchema = z.object(
+      isRegister
+        ? {
+            email: z
+              .string()
+              .min(1, { message: "Please fill the email field." })
+              .email("This is not a valid email."),
+            password: z
+              .string()
+              .min(8, {
+                message: "The password should contain at least 8 letters",
+              }),
+            first_name: z
+              .string()
+              .min(1, { message: "Please fill the first name field" }),
+            last_name: z
+              .string()
+              .min(1, { message: "Please fill the last name field" }),
+            user_name: z
+              .string()
+              .min(1, { message: "Please fill the user name field" }),
+            password_confirmation: z
+              .string()
+              .min(1, { message: "Please confirm your password" }),
+          }
+        : {
+            email: z
+              .string()
+              .min(1, { message: "This field has to be filled." })
+              .email("This is not a valid email."),
+            password: z
+              .string()
+              .min(8, {
+                message: "The password should contain at least 8 letters",
+              }),
+          }
+    );
+
+    const result = formSchema.safeParse(Object.fromEntries(formData.entries()));
+    if (!result.success) {
+      result.error.errors.forEach((error) => toast.error(error.message));
+      return;
+    }
 
     if (isRegister && inputRef.current && inputRef.current.files) {
       const file = inputRef.current.files[0];
@@ -61,6 +105,7 @@ const Form = ({
             : "application/json",
         },
       });
+
       if (isRegister) {
         if (response.data.data.token && response.data.data.user) {
           localStorage.setItem("token", response.data.data.token);
@@ -93,7 +138,11 @@ const Form = ({
         }
       }
     } catch (error) {
-      toast(isRegister? "there was an error make sure the fields are filled correctly" : "there was an error make sure the account entered is correct");
+      toast.error(
+        isRegister
+          ? "There was an error. Make sure the fields are filled correctly."
+          : "There was an error. Make sure the account entered is correct."
+      );
       console.error("Error submitting form: ", error);
     }
   };
@@ -104,7 +153,7 @@ const Form = ({
 
     const file = files[0];
     const url = URL.createObjectURL(file);
-    setPfp(url); 
+    setPfp(url);
   };
 
   const handleButtonClick = (e: React.MouseEvent<HTMLLabelElement>) => {
